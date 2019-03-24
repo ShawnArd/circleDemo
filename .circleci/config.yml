@@ -3,8 +3,10 @@ jobs:
   build:
     docker:
     - image: circleci/node:8.9.4
+
     steps:
     - checkout
+
     - run:
         command: npm install
     #save Cache
@@ -15,6 +17,7 @@ jobs:
     - run:
         name: Build project
         command: npm run build
+
   UnitTest:
     docker:
     - image: circleci/node:8.9.4
@@ -27,11 +30,12 @@ jobs:
         command: npm install
     - run:
         command: npm run test:unit
+
 workflows:
   version: 2
   build_and_test:
     jobs:
     - build
     - UnitTest:
-      requires:
-       - build
+        requires:
+        - build
